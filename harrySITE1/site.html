@@ -1,22 +1,26 @@
-Copier le code
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Le Marrakech | Saveurs Authentiques</title>
-    <!-- Importation de polices élégantes -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Le Gâteau - Restaurant Gastronomique</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        /* --- VARIABLES & RESET --- */
+        /* --- VARIABLES --- */
         :root {
-            --primary-color: #c0392b; /* Terracotta profond */
-            --secondary-color: #d35400; /* Orange Epice */
-            --accent-gold: #f1c40f; /* Or */
-            --dark-bg: #2c3e50;
-            --light-bg: #fdfbf7; /* Blanc cassé / Sable */
-            --text-color: #333;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --dark: #0f0f0f;
+            --dark-secondary: #1a1a1a;
+            --text-light: #f5f5f5;
+            --text-grey: #a0a0a0;
+            --transition: all 0.3s ease-in-out;
         }
 
         * {
@@ -25,344 +29,460 @@ Copier le code
             box-sizing: border-box;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--text-light);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--dark-bg);
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
+        a { text-decoration: none; color: inherit; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 100px 0; }
+        .text-gold { color: var(--gold); }
+
+        /* --- BOUTON --- */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+            background: transparent;
+            position: relative;
+            z-index: 1;
         }
 
-        ul {
-            list-style: none;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 100%;
+            background-color: var(--gold);
+            z-index: -1;
+            transition: var(--transition);
         }
 
-        /* --- NAVIGATION --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
+        .btn:hover { color: var(--dark); }
+        .btn:hover::before { width: 100%; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
             z-index: 1000;
+            padding: 25px 0;
+            transition: var(--transition);
         }
+
+        header.scrolled {
+            background-color: rgba(15, 15, 15, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
+        .logo span { color: var(--gold); }
 
-        .logo span {
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-links { display: flex; gap: 40px; }
         .nav-links a {
-            font-weight: 500;
-            font-size: 14px;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .btn-reservation {
-            padding: 10px 25px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-
-        .btn-reservation:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1541518763669-27fef04b14ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        .btn-cta {
-            padding: 15px 40px;
-            background-color: var(--accent-gold);
-            color: var(--dark-bg);
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 5px;
-            border: 2px solid var(--accent-gold);
-            cursor: pointer;
-        }
-
-        .btn-cta:hover {
-            background-color: transparent;
-            color: white;
-            border-color: white;
-        }
-
-        /* --- MENU SECTION --- */
-        .menu-section {
-            padding: 80px 10%;
-            background-color: var(--light-bg);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 20px;
             position: relative;
         }
 
-        .section-title::after {
+        .nav-links a::after {
             content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary-color);
-            margin: 15px auto;
+            position: absolute;
+            width: 0; height: 1px; bottom: -5px; left: 0;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        .menu-subtitle {
-            text-align: center;
-            margin-bottom: 60px;
-            color: #666;
-            font-size: 1.1rem;
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
         }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 40px;
+        }
+
+        /* --- ABOUT --- */
+        .about { background-color: var(--dark-secondary); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .about-text p { color: var(--text-grey); margin-bottom: 20px; }
+
+        .about-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 1px solid var(--gold);
+            padding: 10px;
+        }
+
+        /* --- MENU --- */
+        .menu-section { background-color: var(--dark); }
+
+        .menu-header { text-align: center; margin-bottom: 60px; }
+        .menu-header h2 { font-size: 2.5rem; }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
         }
 
-        .menu-category {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-            border-top: 5px solid var(--primary-color);
-        }
-
-        .menu-category:hover {
-            transform: translateY(-10px);
-        }
-
-        .category-title {
-            font-size: 1.8rem;
+        .menu-category h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
             margin-bottom: 30px;
-            color: var(--primary-color);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px;
         }
 
         .menu-item {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
             margin-bottom: 20px;
             position: relative;
         }
 
-        .menu-item::after {
-            content: '................................................................';
+        .menu-item::before {
+            content: '';
             position: absolute;
-            left: 0;
-            bottom: -5px;
+            bottom: 5px; left: 0;
             width: 100%;
-            overflow: hidden;
-            color: #ddd;
-            font-size: 10px;
-            opacity: 0.5;
-            z-index: -1;
+            border-bottom: 1px dotted rgba(255,255,255,0.2);
+            z-index: 0;
         }
 
-        .item-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            background-color: white;
-            padding-right: 10px;
+        .menu-item-name, .menu-item-price {
+            background-color: var(--dark);
             position: relative;
             z-index: 1;
         }
 
-        .item-price {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            background-color: white;
-            padding-left: 10px;
-            position: relative;
-            z-index: 1;
+        .menu-item-name { display: flex; flex-direction: column; }
+        .menu-item-name span {
+            font-size: 0.8rem;
+            color: var(--text-grey);
+        }
+        .menu-item-price { color: var(--gold); padding-left: 10px; }
+
+        /* --- CONTACT / RESA --- */
+        .reservation {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                url('https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
         }
 
-        .item-desc {
-            font-size: 0.85rem;
-            color: #777;
-            margin-top: 5px;
-            font-style: italic;
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 40px;
+            border: 1px solid var(--gold);
         }
 
-        /* --- CONTACT & FOOTER --- */
-        .contact-section {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 80px 10%;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            align-items: center;
-        }
+        .form-group { position: relative; margin-bottom: 25px; }
 
-        .contact-info h3 {
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-
-        .contact-info p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .map-placeholder {
+        .form-group input, .form-group textarea {
             width: 100%;
-            height: 300px;
-            background: #34495e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            margin-top: 40px;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+            transition: var(--transition);
         }
 
+        .form-group input:focus, .form-group textarea:focus {
+            border-bottom-color: var(--gold);
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 15px; left: 0;
+            color: var(--text-grey);
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .form-group input:focus ~ label,
+        .form-group input:valid ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group textarea:valid ~ label {
+            top: -10px;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        /* --- FOOTER --- */
         footer {
-            background-color: #222;
-            color: #888;
+            background-color: #050505;
+            padding: 50px 0 20px;
+            border-top: 1px solid #222;
             text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 { color: var(--gold); margin-bottom: 15px; }
+        .footer-col p { color: var(--text-grey); font-size: 0.9rem; }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            line-height: 40px;
+            margin: 0 5px;
+            transition: var(--transition);
+        }
+        .social-links a:hover { background-color: var(--gold); color: #000; }
+
+        .copyright {
+            color: #444;
+            font-size: 0.8rem;
+            border-top: 1px solid #222;
+            padding-top: 20px;
         }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero-content h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
             .menu-grid { grid-template-columns: 1fr; }
-            .contact-section { flex-direction: column; }
+            .nav-links { display: none; } /* Menu mobile simplifié */
+            .contact-form { padding: 25px; }
         }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-content > * { animation: fadeInUp 1s ease-out; }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">Le <span>Marrakech</span></div>
-        <div class="nav-links">
-            <a href="#home">Accueil</a>
-            <a href="#menu">Menu</a>
-            <a href="#contact">Adresse</a>
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Le <span>Gâteau</span></a>
+                <ul class="nav-links">
+                    <li><a href="#about">Accueil</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#contact">Réservation</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <a href="#contact" class="btn-reservation">Réserver une table</a>
-    </nav>
-
-    <!-- Hero Section -->
-    <header id="home" class="hero">
-        <h1>Le Marrakech</h1>
-        <p>Une immersion culinaire au cœur du Maroc</p>
-        <a href="#menu" class="btn-cta">Découvrir le Menu</a>
     </header>
 
-    <!-- Menu Section -->
-    <section id="menu" class="menu-section">
-        <h2 class="section-title">Notre Menu</h2>
-        <p class="menu-subtitle">Des recettes héritage transmises de génération en génération</p>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>L'Art de la Gastronomie</h1>
+            <p>Une expérience culinaire inoubliable au cœur de la ville</p>
+            <a href="#reservation" class="btn">Réserver une table</a>
+        </div>
+    </section>
 
-        <div class="menu-grid">
-            <!-- Catégorie Plats -->
-            <div class="menu-category">
-                <h3 class="category-title">🍖 Les Plats</h3>
-                
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Couscous Royal</span>
-                        <div class="item-desc">Semoule, AGNEAU, légumes, pois chiches</div>
-                    </div>
-                    <span class="item-price">95 DH</span>
+    <!-- ABOUT -->
+    <section id="about" class="about section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Notre Passion, Votre-Assiette</h2>
+                    <p>Fondé en 2010, Le Gâteau est devenu une référence de la gastronomie raffinée. Notre chef, fort de 20 ans d'expérience dans les plus grandes maisons, propose une cuisine inventive basée sur des produits frais et locaux.</p>
+                    <p>Chaque plat est une œuvre d'art, soigneusement préparée pour éveiller vos sens.</p>
+                    <a href="#menu" class="btn">Découvrir notre carte</a>
                 </div>
+                <img src="https://images.unsplash.com/photo-1414235077428-338989b2e2e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Table dressée" class="about-img">
+            </div>
+        </div>
+    </section>
 
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Tajine au Poulet</span>
-                        <div class="item-desc">Poulet fermier, olives, citron confit</div>
+    <!-- MENU -->
+    <section id="menu" class="menu-section section-padding">
+        <div class="container">
+            <div class="menu-header">
+                <h2 class="text-gold">La Carte</h2>
+            </div>
+            <div class="menu-grid">
+                <!-- Entrées -->
+                <div class="menu-category">
+                    <h3>Entrées</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Foie gras poêlé
+                            <span>Figues rôties, pain toasté</span>
+                        </div>
+                        <div class="menu-item-price">24€</div>
                     </div>
-                    <span class="item-price">85 DH</span>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Saumon fumé
+                            <span>Crème citronnée, aneth</span>
+                        </div>
+                        <div class="menu-item-price">19€</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Velouté de、曲
+                            <span>Trufflee, croûtons</span>
+                        </div>
+                        <div class="menu-item-price">14€</div>
+                    </div>
                 </div>
-                
-                <div class="menu-item">
-                    <div>
-                        <span class="item-name">Kefta Tagine</span>
-                        <div class="item-desc">Boulettes de viande hachée, œufs</div>
+                <!-- Plats -->
+                <div class="menu-category">
+                    <h3>Plats</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Filet de bœuf
+                            <span>Pommes purée, sauce vin</span>
+                        </div>
+                        <div class="menu-item-price">38€</div>
                     </div>
-                    <span class="item-price">80 DH</span>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Pavé de saumon
+                            <span>Légumes de saison</span>
+                        </div>
+                        <div class="menu-item-price">28€</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Risotto aux truffes
+                            <span>Parme, parmesan</span>
+                        </div>
+                        <div class="menu-item-price">26€</div>
+                    </div>
+                </div>
+                <!-- Desserts -->
+                <div class="menu-category">
+                    <h3>Desserts</h3>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Tarte fine aux pommes
+                            <span>Glace vanille</span>
+                        </div>
+                        <div class="menu-item-price">12€</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Crème brûlée
+                            <span>Vanille de Madagascar</span>
+                        </div>
+                        <div class="menu-item-price">11€</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-name">
+                            Mousse au chocolat
+                            <span>Orbital amer</span>
+                        </div>
+                        <div class="menu-item-price">12€</div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Catégorie Entrées -->
-            <div class="menu-category">
-                <h3 class="category-title">🥗 Les Entrées</h3>
-                
-                <div class="menu-items
+    <!-- CONTACT / RESERVATION -->
+    <section id="contact" class="reservation section-padding">
+        <div class="container">
+            <div class="menu-header">
+                <h2 class="text-gold">Réservation</h2>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" required>
+                    <label>Nom</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" required>
+                    <label>Téléphone</label>
+                </div>
+                <div class="form-group">
+                    <input type="date" required>
+                    <label>Date</label>
+                </div>
+                <div class="form-group">
+                    <input type="number" required min="1" max="10">
+                    <label>Nombre de personnes</label>
+                </div>
+                <div class="form-group">
+                    <textarea rows="4" required></textarea>
+                    <label>Message (allergies, occasion spéciale...)</label>
+                </div>
+                <button type="submit" class="btn" style="width: 100%">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Le Gâteau</h4>
+                    <p>12 Avenue de la Gastronomie<br>75008 Paris</p>
+               
